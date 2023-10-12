@@ -193,7 +193,7 @@ function isUserSignedIn() {
 // Function to show the file upload form
 function showFileUploadForm() {
     const fileUploadForm = `
-        <br><br>
+        <br><br><br><br>
         <h1>File Upload for Teachers</h1>
         <br><br>
         <input type="file" id="file-input">

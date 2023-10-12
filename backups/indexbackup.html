@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Role-Based File Upload</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <!-- Include Firebase scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
+</head>
+
+<body>
+    <!-- Firebase configuration -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBrYSQxr4BNgFuqEtAzSy7hH6fhfqNicZA",
+            authDomain: "paper2-d48b3.firebaseapp.com",
+            databaseURL: "https://paper2-d48b3-default-rtdb.firebaseio.com",
+            projectId: "paper2-d48b3",
+            storageBucket: "paper2-d48b3.appspot.com",
+            messagingSenderId: "687285383370",
+            appId: "1:687285383370:web:853c5ae705d4455363c433",
+            measurementId: "G-35C4139D7B"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <!-- Sign-up form -->
+    <h1>Sign Up</h1>
+    <input type="text" id="signup-email" placeholder="Email">
+    <input type="password" id="signup-password" placeholder="Password">
+    <label for="user-role">Select Role:</label>
+    <select id="user-role">
+        <option value="teacher">Teacher</option>
+        <option value="admin">Admin</option>
+    </select>
+    <button onclick="signUp()">Sign Up</button>
+
+    <!-- Login form -->
+    <h1>Login</h1>
+    <input type="text" id="login-email" placeholder="Email">
+    <input type="password" id="login-password" placeholder="Password">
+    <button onclick="login()">Login</button>
+
+    <!-- Add this to your index.html file below the "Login" section -->
+    <div id="file-list"></div>
+
+    <button onclick="signOut()">Sign Out</button>
+
+    <!-- JavaScript code from main.js -->
+    <script src="main.js"></script>
+</body>
+
+</html>
+
