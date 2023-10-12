@@ -1,0 +1,91 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Basic page styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Card styles for login and signup */
+.card {
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin: 20px;
+    text-align: center;
+    max-width: 300px;
+}
+
+.card h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Form input styles */
+input[type="text"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Buttons */
+button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: background-color 0.3s ease; /* Add transition for hover effect */
+}
+
+/* Sign Out button */
+button#sign-out-button {
+    background-color: #DC3545;
+}
+
+/* File Upload form */
+#file-list {
+    text-align: left;
+    margin: 20px 0;
+}
+
+/* File list */
+#file-list a {
+    display: block;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    margin: 5px 0;
+    text-decoration: none;
+    color: #007BFF;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Add transition for hover effect */
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .card {
+        max-width: 100%;
+    }
+
+    button {
+        width: 100%;
+    }
+}
