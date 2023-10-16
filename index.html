@@ -3,41 +3,50 @@
 
 <head>
     <title>Role-Based File Upload</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="styles.css" />
 </head>
 
 <body>
-
     <div class="parent">
-        <div class="div1"> </div>
-        <div class="div2"> </div>
+        <div class="div1"></div>
+        <div class="div2"></div>
         <div class="div3">
-
             <!-- First Section: Login Page -->
             <section id="login-section">
                 <h1>Login</h1>
-                <input type="text" id="login-email" placeholder="Email">
-                <input type="password" id="login-password" placeholder="Password">
+                <input type="text" id="login-email" placeholder="Email" />
+                <input type="password" id="login-password" placeholder="Password" />
                 <button onclick="login()">Login</button>
             </section>
 
             <!-- Second Section: File Upload for Teachers Page -->
-            <section id="file-upload-section" style="display: none;">
+            <section id="file-upload-section" style="display: none">
                 <h1>File Upload for Teachers</h1>
-                <input type="file" id="file-input">
+                <input type="file" id="file-input" />
                 <button onclick="uploadFile()">Upload File</button>
                 <button onclick="viewOwnFiles()">View Your Files</button>
                 <!-- Add an HTML element for the loading icon -->
-                <div id="loading-icon" style="display: none;">
+                <div id="loading-icon" style="display: none">
                     <p>Uploading...</p>
                 </div>
 
-                <!-- Add an HTML element to display the generated key -->
-                <div id="key-display" style="display: none;">
-                    <strong>Generated Key:</strong>
-                    <span id="generated-key"></span>
+                <!-- Add elements to display encrypted download link and buttons for encryption/decryption -->
+                <div id="download-link-container" style="display: none">
+                    <p>File uploaded successfully. Download link:</p>
+                    <input type="text" id="download-link" readonly />
+                    <!-- <button onclick="encryptDownloadLink()">Encrypt Link</button>
+                    <button onclick="decryptDownloadLink()">Decrypt Link</button> -->
                 </div>
+                <!-- Add an element to display the encrypted download link -->
+                <!-- <div id="encrypted-link-container" style="display: none">
+                    <p>Encrypted Download Link:</p>
+                    <input type="text" id="encrypted-link" readonly />
+                    <button onclick="decryptDownloadLink()">Decrypt Link</button>
+                </div> -->
 
+                <!-- <button onclick="downloadEncryptedLink()">
+            Download Encrypted Link
+          </button> -->
 
                 <div id="file-listt">
                     <!-- Files will be displayed here -->
@@ -45,68 +54,68 @@
                 <button onclick="signOut()">Sign Out</button>
             </section>
 
-
             <!-- Third Section: Admin Page to Display Teacher Files -->
-            <section id="admin-section" style="display: none;">
+            <section id="admin-section" style="display: none">
                 <h1>Admin Page</h1>
                 <button onclick="showRegistrationForm()">Register User</button>
-                <div id="registration-form" style="display: none;">
+                <div id="registration-form" style="display: none">
                     <h2>Register a New User</h2>
                     <form id="user-registration-form">
                         <label for="name">Name:</label>
-                        <input type="text" id="name" required><br><br>
+                        <input type="text" id="name" required /><br /><br />
                         <label for="email">Email:</label>
-                        <input type="email" id="email" required><br><br>
+                        <input type="email" id="email" required /><br /><br />
                         <label for="subject">Subject:</label>
-                        <input type="text" id="subject" required><br><br>
+                        <input type="text" id="subject" required /><br /><br />
                         <label for="role">Role:</label>
                         <select id="role" required>
-                            <option value="teacher">Teacher</option>
-                            <option value="admin">Admin</option>
-                        </select><br><br>
-                        <label for="password">Password:</label>
-                        <input type="password" id="password" required><br><br>
-                        <button type="button" onclick="registerUser()">Register</button>
-                        <button onclick="signOut()">Sign Out</button>
-                    </form>
-                </div>
-                <div id="file-list">
-                    <h1>asdasd</h1><!-- Files will be displayed here -->
-                </div>
-            </section>
+                <option value="teacher">Teacher</option>
+                <option value="admin">Admin</option></select
+              ><br /><br />
+              <label for="password">Password:</label>
+              <input type="password" id="password" required /><br /><br />
+              <button type="button" onclick="registerUser()">Register</button>
+              <button onclick="signOut()">Sign Out</button>
+            </form>
+          </div>
+          <div id="file-list">
+            <h1>asdasd</h1>
+            <!-- Files will be displayed here -->
+          </div>
+        </section>
+      </div>
 
-        </div>
-
-        <div class="div4"> </div>
-        <div class="div5"> </div>
+      <div class="div4"></div>
+      <div class="div5"></div>
     </div>
 
     <!-- Include Firebase scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.3.0/crypto-js.js"></script>
+
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
     <!-- Firebase configuration -->
     <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyBrYSQxr4BNgFuqEtAzSy7hH6fhfqNicZA",
-            authDomain: "paper2-d48b3.firebaseapp.com",
-            databaseURL: "https://paper2-d48b3-default-rtdb.firebaseio.com",
-            projectId: "paper2-d48b3",
-            storageBucket: "paper2-d48b3.appspot.com",
-            messagingSenderId: "687285383370",
-            appId: "1:687285383370:web:853c5ae705d4455363c433",
-            measurementId: "G-35C4139D7B"
-        };
+      const firebaseConfig = {
+        apiKey: "AIzaSyBrYSQxr4BNgFuqEtAzSy7hH6fhfqNicZA",
+        authDomain: "paper2-d48b3.firebaseapp.com",
+        databaseURL: "https://paper2-d48b3-default-rtdb.firebaseio.com",
+        projectId: "paper2-d48b3",
+        storageBucket: "paper2-d48b3.appspot.com",
+        messagingSenderId: "687285383370",
+        appId: "1:687285383370:web:853c5ae705d4455363c433",
+        measurementId: "G-35C4139D7B",
+      };
 
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
     <!-- JavaScript code from main.js -->
     <script src="main.js"></script>
-</body>
-
+  </body>
 </html>
