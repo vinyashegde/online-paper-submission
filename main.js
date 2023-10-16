@@ -49,7 +49,7 @@ function uploadFile() {
 
             uploadTask.then(snapshot => {
                 // Upload completed successfully
-                alert("PDF file uploaded successfully");
+                alert("PDF file uploaded successfully.");
                 // Hide the loading icon
                 loadingIcon.style.display = "none";
 
@@ -68,6 +68,16 @@ function uploadFile() {
                         // Show the download link container
                         const downloadLinkContainer = document.getElementById("download-link-container");
                         downloadLinkContainer.style.display = "block";
+
+                        // Automatically download the encrypted link to local storage as a text file
+                        const blob = new Blob([encryptedLink], { type: "text/plain" });
+                        const a = document.createElement("a");
+                        a.href = URL.createObjectURL(blob);
+                        a.download = "encrypted-link.txt";
+                        a.style.display = "none";
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
                     })
                     .catch(error => {
                         console.error("Error generating download link: " + error);
@@ -80,6 +90,7 @@ function uploadFile() {
         }
     }
 }
+
 
 
 // // Function to encrypt the download link
@@ -230,9 +241,6 @@ function goBack() {
 }
 
 
-
-
-
 // Function to view a file in a new tab
 function viewFile(fileRef) {
     fileRef.getDownloadURL()
@@ -337,4 +345,8 @@ function viewOwnFiles() {
         .catch((error) => {
             console.error("Error displaying teacher files: " + error);
         });
+}
+
+function openWin() {
+    window.open("encrypt.html");
 }
