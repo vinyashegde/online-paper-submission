@@ -27,9 +27,10 @@
                 <button onclick="viewOwnFiles()">View Your Files</button>
                 <!-- Add an HTML element for the loading icon -->
                 <div id="loading-icon" style="display: none">
+                    <br><br>
                     <p>Uploading...</p>
                 </div>
-
+                <br><br>
                 <!-- Add elements to display encrypted download link and buttons for encryption/decryption -->
                 <div id="download-link-container" style="display: none">
                     <p>File uploaded successfully. Download link:</p>
@@ -56,6 +57,9 @@
 
             <!-- Third Section: Admin Page to Display Teacher Files -->
             <section id="admin-section" style="display: none">
+
+                <button onclick="openWin()">Decryption Tool</button>
+                <br><br>
                 <h1>Admin Page</h1>
                 <button onclick="showRegistrationForm()">Register User</button>
                 <div id="registration-form" style="display: none">
@@ -75,10 +79,11 @@
               <label for="password">Password:</label>
               <input type="password" id="password" required /><br /><br />
               <button type="button" onclick="registerUser()">Register</button>
+              <br><br><br>
               <button onclick="signOut()">Sign Out</button>
             </form>
           </div>
-          <div id="file-list">
+          <div id="file-list" style="display: none">
             <h1>asdasd</h1>
             <!-- Files will be displayed here -->
           </div>
