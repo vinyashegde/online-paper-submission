@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Link Encryption and Decryption</title>
+</head>
+
+<body>
+    <h1>Link Encryption and Decryption</h1>
+
+    <h2>Encrypt Link</h2>
+    <input type="text" id="linkToEncrypt" placeholder="Enter a link to encrypt">
+    <button onclick="encryptLink()">Encrypt</button>
+    <br>
+
+    <h2>Encrypted Link</h2>
+    <textarea id="encryptedLink" readonly></textarea>
+    <br>
+
+    <h2>Decrypt Link</h2>
+    <input type="text" id="encryptedLinkToDecrypt" placeholder="Enter the encrypted link">
+    <button onclick="decryptLink()">Decrypt</button>
+    <br>
+
+    <h2>Decrypted Link</h2>
+    <input type="text" id="decryptedLink" readonly>
+
+    <!-- Include Crypto-JS library (AES) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+
+    <script>
+        // Encryption Key (must be kept secret)
+        const encryptionKey = "YourSecretKey"; // Change this to your secret key
+
+        function encryptLink() {
+            const linkToEncrypt = document.getElementById("linkToEncrypt").value;
+            const encryptedLink = CryptoJS.AES.encrypt(linkToEncrypt, encryptionKey).toString();
+            document.getElementById("encryptedLink").value = encryptedLink;
+        }
+
+        function decryptLink() {
+            const encryptedLinkToDecrypt = document.getElementById("encryptedLinkToDecrypt").value;
+            try {
+                const decryptedLink = CryptoJS.AES.decrypt(encryptedLinkToDecrypt, encryptionKey).toString(CryptoJS.enc.Utf8);
+                document.getElementById("decryptedLink").value = decryptedLink;
+            } catch (error) {
+                alert("Decryption failed. Make sure you entered the correct encrypted link and key.");
+            }
+        }
+    </script>
+</body>
+
+</html>
