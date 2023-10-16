@@ -1,11 +1,14 @@
 /* Reset default margin and padding */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+
 /* Basic page styles */
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
@@ -20,15 +23,31 @@ body {
     grid-template-rows: 2fr repeat(4, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-    }
-    
-    .div1 { grid-area: 1 / 1 / 2 / 5; }
-    .div2 { grid-area: 2 / 1 / 5 / 2; }
-    .div3 { grid-area: 2 / 2 / 5 / 4; }
-    .div4 { grid-area: 2 / 4 / 5 / 5; }
-    .div5 { grid-area: 5 / 1 / 6 / 5; }
+}
+
+.div1 {
+    grid-area: 1 / 1 / 2 / 5;
+}
+
+.div2 {
+    grid-area: 2 / 1 / 5 / 2;
+}
+
+.div3 {
+    grid-area: 2 / 2 / 5 / 4;
+}
+
+.div4 {
+    grid-area: 2 / 4 / 5 / 5;
+}
+
+.div5 {
+    grid-area: 5 / 1 / 6 / 5;
+}
+
 
 /* Card styles for login and signup */
+
 .card {
     display: inline-block;
     background-color: #fff;
@@ -45,7 +64,9 @@ body {
     margin-bottom: 20px;
 }
 
+
 /* Form input styles */
+
 input[type="text"],
 input[type="password"],
 select {
@@ -57,7 +78,9 @@ select {
     font-size: 16px;
 }
 
+
 /* Buttons */
+
 button {
     background-color: #007BFF;
     color: #fff;
@@ -70,18 +93,24 @@ button {
     /* Add transition for hover effect */
 }
 
+
 /* Sign Out button */
+
 button#sign-out-button {
     background-color: #DC3545;
 }
 
+
 /* File Upload form */
+
 #file-list {
     text-align: left;
     margin: 20px 0;
 }
 
+
 /* File list */
+
 #file-list a {
     display: block;
     padding: 10px;
@@ -100,7 +129,9 @@ button#sign-out-button {
     margin: 20px 0;
 }
 
+
 /* File list */
+
 #file-listt a {
     display: block;
     padding: 10px;
@@ -114,12 +145,13 @@ button#sign-out-button {
     /* Add transition for hover effect */
 }
 
+
 /* Responsive styles */
+
 @media screen and (max-width: 768px) {
     .card {
         max-width: 100%;
     }
-
     button {
         width: 100%;
     }
