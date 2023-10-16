@@ -4,6 +4,83 @@
 <head>
     <title>Role-Based File Upload</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+
+    <div class="parent">
+        <div class="div1"> </div>
+        <div class="div2"> </div>
+        <div class="div3">
+
+            <!-- First Section: Login Page -->
+            <section id="login-section">
+                <h1>Login</h1>
+                <input type="text" id="login-email" placeholder="Email">
+                <input type="password" id="login-password" placeholder="Password">
+                <button onclick="login()">Login</button>
+            </section>
+
+            <!-- Second Section: File Upload for Teachers Page -->
+            <section id="file-upload-section" style="display: none;">
+                <h1>File Upload for Teachers</h1>
+                <input type="file" id="file-input">
+                <button onclick="uploadFile()">Upload File</button>
+                <button onclick="viewOwnFiles()">View Your Files</button>
+                <!-- Add an HTML element for the loading icon -->
+                <div id="loading-icon" style="display: none;">
+                    <p>Uploading...</p>
+                </div>
+
+                <!-- Add an HTML element to display the generated key -->
+                <div id="key-display" style="display: none;">
+                    <strong>Generated Key:</strong>
+                    <span id="generated-key"></span>
+                </div>
+
+
+                <div id="file-listt">
+                    <!-- Files will be displayed here -->
+                </div>
+                <button onclick="signOut()">Sign Out</button>
+            </section>
+
+
+            <!-- Third Section: Admin Page to Display Teacher Files -->
+            <section id="admin-section" style="display: none;">
+                <h1>Admin Page</h1>
+                <button onclick="showRegistrationForm()">Register User</button>
+                <div id="registration-form" style="display: none;">
+                    <h2>Register a New User</h2>
+                    <form id="user-registration-form">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" required><br><br>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" required><br><br>
+                        <label for="subject">Subject:</label>
+                        <input type="text" id="subject" required><br><br>
+                        <label for="role">Role:</label>
+                        <select id="role" required>
+                            <option value="teacher">Teacher</option>
+                            <option value="admin">Admin</option>
+                        </select><br><br>
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" required><br><br>
+                        <button type="button" onclick="registerUser()">Register</button>
+                        <button onclick="signOut()">Sign Out</button>
+                    </form>
+                </div>
+                <div id="file-list">
+                    <h1>asdasd</h1><!-- Files will be displayed here -->
+                </div>
+            </section>
+
+        </div>
+
+        <div class="div4"> </div>
+        <div class="div5"> </div>
+    </div>
+
     <!-- Include Firebase scripts -->
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
@@ -25,43 +102,11 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
     </script>
-</head>
 
-<body>
-    <br><br><br>
-    <h1>Welcome to Online Paper Submission System</h1>
-    <br><br><br>
-    <!-- Sign-up card -->
-    <div class="card">
-    <h1>Sign Up</h1>
-    <input type="text" id="signup-email" placeholder="Email">
-    <input type="password" id="signup-password" placeholder="Password">
-    <label for="user-role">Select Role:</label>
-    <select id="user-role">
-        <option value="teacher">Teacher</option>
-        <option value="admin">Admin</option>
-    </select>
-    <button onclick="signUp()">Sign Up</button>
-</div>
-
-<!-- Login card -->
-<div class="card">
-    <h1>Login</h1>
-    <input type="text" id="login-email" placeholder="Email">
-    <input type="password" id="login-password" placeholder="Password">
-    <button onclick="login()">Login</button>
-</div>
-        <!-- Add this to your index.html file below the "Login" section -->
-        <div id="file-list"></div>
-
-    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
     <!-- JavaScript code from main.js -->
     <script src="main.js"></script>
 </body>
 
 </html>
-
-
-
-
