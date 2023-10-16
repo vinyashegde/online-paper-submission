@@ -47,20 +47,84 @@ function uploadFile() {
             const loadingIcon = document.getElementById("loading-icon");
             loadingIcon.style.display = "block";
 
-            uploadTask.on('state_changed', function (snapshot) {
-                // Track upload progress if needed
-            }, function (error) {
+            uploadTask.then(snapshot => {
+                // Upload completed successfully
+                alert("PDF file uploaded successfully");
+                // Hide the loading icon
+                loadingIcon.style.display = "none";
+
+                // Generate a download link using a download token
+                snapshot.ref
+                    .getDownloadURL()
+                    .then(downloadURL => {
+                        // Automatically encrypt the download link
+                        const encryptionKey = "YourSecretKey"; // Replace with your secret key
+                        const encryptedLink = CryptoJS.AES.encrypt(downloadURL, encryptionKey).toString();
+
+                        // Display the encrypted download link
+                        const encryptedLinkField = document.getElementById("download-link");
+                        encryptedLinkField.value = encryptedLink;
+
+                        // Show the download link container
+                        const downloadLinkContainer = document.getElementById("download-link-container");
+                        downloadLinkContainer.style.display = "block";
+                    })
+                    .catch(error => {
+                        console.error("Error generating download link: " + error);
+                    });
+            }).catch(error => {
                 console.error("Upload failed: " + error);
                 // Hide the loading icon in case of an error
-                loadingIcon.style.display = "none";
-            }, function () {
-                // Upload completed successfully
-                alert("PDF file uploaded successfully.");
-                // Hide the loading icon
                 loadingIcon.style.display = "none";
             });
         }
     }
+}
+
+
+// // Function to encrypt the download link
+// function encryptDownloadLink() {
+//     const downloadLink = document.getElementById("download-link").value;
+//     const encryptionKey = "YourSecretKey"; // Replace with your secret key
+
+//     if (downloadLink && encryptionKey) {
+//         const encryptedLink = CryptoJS.AES.encrypt(downloadLink, encryptionKey).toString();
+//         const encryptedLinkField = document.getElementById("encrypted-link");
+//         encryptedLinkField.value = encryptedLink;
+
+//         // Show the encrypted link container
+//         const encryptedLinkContainer = document.getElementById("encrypted-link-container");
+//         encryptedLinkContainer.style.display = "block";
+//     } else {
+//         alert("Please provide a download link and encryption key.");
+//     }
+// }
+
+// // Function to decrypt the encrypted download link
+// function decryptDownloadLink() {
+//     const encryptedLink = document.getElementById("encrypted-link").value;
+//     const encryptionKey = "YourSecretKey"; // Replace with your secret key
+
+//     if (encryptedLink && encryptionKey) {
+//         const decryptedLink = CryptoJS.AES.decrypt(encryptedLink, encryptionKey).toString(CryptoJS.enc.Utf8);
+//         const downloadLink = document.getElementById("download-link");
+//         downloadLink.value = decryptedLink;
+
+//         // Show the download link container
+//         const downloadLinkContainer = document.getElementById("download-link-container");
+//         downloadLinkContainer.style.display = "block";
+//     } else {
+//         alert("Please provide an encrypted download link and encryption key.");
+//     }
+// }
+
+
+// Function to copy the download link to the clipboard
+function copyDownloadLink() {
+    const downloadLink = document.getElementById("download-link");
+    downloadLink.select();
+    document.execCommand("copy");
+    alert("Download link copied to clipboard!");
 }
 
 
@@ -77,7 +141,7 @@ function login() {
             const user = userCredential.user;
 
             // Check the user's role and show the upload section for teachers
-            firebase.database().ref('users/' + user.uid).once('value').then(function (snapshot) {
+            firebase.database().ref('users/' + user.uid).once('value').then(function(snapshot) {
                 const role = snapshot.val().role;
                 if (role === "teacher") {
                     showFileUploadSection(); // Show the upload form for teachers
@@ -274,5 +338,3 @@ function viewOwnFiles() {
             console.error("Error displaying teacher files: " + error);
         });
 }
-
-
