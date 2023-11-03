@@ -3,96 +3,97 @@
 
 <head>
     <title>Role-Based File Upload</title>
-    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="styles.css" /> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+     /* Remove the outline and focus styles */
+.card {
+    box-shadow: none;
+    border: none;
+}
+.card:focus, .card:active {
+    box-shadow: none;
+    border: none;
+}
+
+  </style>
 </head>
 
 <body>
-    <div class="parent">
-        <div class="div1"></div>
-        <div class="div2"></div>
-        <div class="div3">
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
             <!-- First Section: Login Page -->
-            <section id="login-section">
-                <h1>Login</h1>
-                <input type="text" id="login-email" placeholder="Email" />
-                <input type="password" id="login-password" placeholder="Password" />
-                <button onclick="login()">Login</button>
-            </section>
-
-            <!-- Second Section: File Upload for Teachers Page -->
-            <section id="file-upload-section" style="display: none">
-                <h1>File Upload for Teachers</h1>
-                <input type="file" id="file-input" />
-                <button onclick="uploadFile()">Upload File</button>
-                <button onclick="viewOwnFiles()">View Your Files</button>
-                <!-- Add an HTML element for the loading icon -->
-                <div id="loading-icon" style="display: none">
-                    <br><br>
-                    <p>Uploading...</p>
-                </div>
-                <br><br>
-                <!-- Add elements to display encrypted download link and buttons for encryption/decryption -->
-                <div id="download-link-container" style="display: none">
-                    <p>File uploaded successfully. Download link:</p>
-                    <input type="text" id="download-link" readonly />
-                    <!-- <button onclick="encryptDownloadLink()">Encrypt Link</button>
-                    <button onclick="decryptDownloadLink()">Decrypt Link</button> -->
-                </div>
-                <!-- Add an element to display the encrypted download link -->
-                <!-- <div id="encrypted-link-container" style="display: none">
-                    <p>Encrypted Download Link:</p>
-                    <input type="text" id="encrypted-link" readonly />
-                    <button onclick="decryptDownloadLink()">Decrypt Link</button>
-                </div> -->
-
-                <!-- <button onclick="downloadEncryptedLink()">
-            Download Encrypted Link
-          </button> -->
-
-                <div id="file-listt">
-                    <!-- Files will be displayed here -->
-                </div>
-                <button onclick="signOut()">Sign Out</button>
-            </section>
-
-            <!-- Third Section: Admin Page to Display Teacher Files -->
-            <section id="admin-section" style="display: none">
-                <h3>Admin Dashboard</h3><br><br><br>
-                <button onclick="openWin()">Decryption Tool</button>
-                <br><br>
-                <h3>Admin Page</h3>
-                <button onclick="showRegistrationForm()">Register User</button>
-                <div id="registration-form" style="display: none">
-                    <h2>Register a New User</h2>
-                    <form id="user-registration-form">
-                        <label for="name">Name:</label>
-                        <input type="text" id="name" required /><br /><br />
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" required /><br /><br />
-                        <label for="subject">Subject:</label>
-                        <input type="text" id="subject" required /><br /><br />
-                        <label for="role">Role:</label>
-                        <select id="role" required>
-                <option value="teacher">Teacher</option>
-                <option value="admin">Admin</option></select
-              ><br /><br />
-              <label for="password">Password:</label>
-              <input type="password" id="password" required /><br /><br />
-              <button type="button" onclick="registerUser()">Register</button>
-            </form>
-          </div>
-          <br><br><br>
-            <button onclick="signOut()">Sign Out</button>
-          <div id="file-list" style="display: none">
-            <h1>asdasd</h1>
-            <!-- Files will be displayed here -->
-          </div>
-        </section>
-      </div>
-
-      <div class="div4"></div>
-      <div class="div5"></div>
+            <div id="login-section" class="card">
+                <h1 class="card-title">Login</h1><br>
+                <input type="text" id="login-email" class="form-control" placeholder="Email" /><br>
+                <input type="password" id="login-password" class="form-control" placeholder="Password" /><br>
+                <button onclick="login()" class="btn btn-primary btn-block">Login</button>
+            </div>
+        </div>
     </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <!-- Second Section: File Upload for Teachers Page -->
+            <div id="file-upload-section" style="display: none">
+                <div class="card">
+                    <h1 class="card-title">File Upload for Teachers</h1><br>
+                    <input type="file" id="file-input" class="form-control" /><br>
+                    <button onclick="uploadFile()" class="btn btn-primary btn-block">Upload File</button>
+                    <button onclick="viewOwnFiles()" class="btn btn-info btn-block">View Your Files</button><br>
+                    <div id="loading-icon" style="display: none">
+                        <p>Uploading...</p>
+                    </div>
+                    <div id="download-link-container" style="display: none">
+                        <p>File uploaded successfully. Download link:</p>
+                        <input type="text" id="download-link" class="form-control" readonly />
+                    </div>
+                    <div id="file-listt"></div>
+                    <br><button onclick="signOut()" class="btn btn-danger btn-block">Sign Out</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mx-auto">
+            <!-- Third Section: Admin Page to Display Teacher Files -->
+            <div id="admin-section" style="display: none">
+              <h1>Admin Dashboard</h1>
+                <div class="card">
+                    <button onclick="openWin()" class="btn btn-info btn-block">Decryption Tool</button>
+                    <br><br><h3>Admin Page</h3>
+                    <button onclick="showRegistrationForm()" class="btn btn-primary btn-block">Add User/Admin</button><br><br>
+                    <div id="registration-form" style="display: none">
+                        <h2>Register a New User</h2>
+                        <form id="user-registration-form">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" class="form-control" required /><br /><br />
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" class="form-control" required /><br /><br />
+                            <label for="subject">Subject:</label>
+                            <input type="text" id="subject" class="form-control" required /><br /><br />
+                            <label for="role">Role:</label>
+                            <select id="role" class="form-control" required>
+                                <option value="teacher">Teacher</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                            <br /><br />
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" class="form-control" required /><br /><br />
+                            <br><button type="button" onclick="registerUser()" class="btn btn-success btn-block">Register</button><br>
+                        </form>
+                    </div>
+                    <div id="file-list" style="display: none">
+                        <h1>asdasd</h1>
+                    </div>
+                    <br><button onclick="signOut()" class="btn btn-danger btn-block">Sign Out</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
     <!-- Include Firebase scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.3.0/crypto-js.js"></script>

@@ -3,30 +3,40 @@
 
 <head>
     <title>Link Encryption and Decryption</title>
-    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Remove the outline and focus styles */
+.card {
+    box-shadow: none;
+    border: none;
+}
+.card:focus, .card:active {
+    box-shadow: none;
+    border: none;
+}
+
+    </style>
 </head>
 
 <body>
-    <br><br><br><br>
-    <h1>Decryption Tool</h1>
+    <div class="container mt-5">
+        <h1 class="text-center">Decryption Tool</h1>
 
-    <!-- <h2>Encrypt Link</h2>
-    <input type="text" id="linkToEncrypt" placeholder="Enter a link to encrypt">
-    <button onclick="encryptLink()">Encrypt</button>
-    <br>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="mt-4">Decrypt Link</h2>
+                <input type="text" id="encryptedLinkToDecrypt" class="form-control" placeholder="Enter the encrypted link">
+                <button onclick="decryptLink()" class="btn btn-primary btn-block">Decrypt</button>
+            </div>
+        </div>
 
-    <h2>Encrypted Link</h2>
-    <textarea id="encryptedLink" readonly></textarea>
-    <br> -->
-    <br><br><br><br>
-
-    <h2>Decrypt Link</h2>
-    <input type="text" id="encryptedLinkToDecrypt" placeholder="Enter the encrypted link">
-    <button onclick="decryptLink()">Decrypt</button>
-    <br>
-
-    <h2>Decrypted Link</h2>
-    <input type="text" id="decryptedLink" readonly>
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6">
+                <h2 class="mt-4">Decrypted Link</h2>
+                <input type="text" id="decryptedLink" class="form-control" readonly>
+            </div>
+        </div>
+    </div>
 
     <!-- Include Crypto-JS library (AES) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
@@ -34,12 +44,6 @@
     <script>
         // Encryption Key (must be kept secret)
         const encryptionKey = "YourSecretKey"; // Change this to your secret key
-
-        function encryptLink() {
-            const linkToEncrypt = document.getElementById("linkToEncrypt").value;
-            const encryptedLink = CryptoJS.AES.encrypt(linkToEncrypt, encryptionKey).toString();
-            document.getElementById("encryptedLink").value = encryptedLink;
-        }
 
         function decryptLink() {
             const encryptedLinkToDecrypt = document.getElementById("encryptedLinkToDecrypt").value;

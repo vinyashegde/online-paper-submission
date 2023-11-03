@@ -330,7 +330,7 @@ function viewOwnFiles() {
     teacherFolderRef.listAll()
         .then((res) => {
             const fileListContainer = document.getElementById("file-listt");
-            fileListContainer.innerHTML = '<button onclick="signOut();">Sign Out</button><br><br><h2>Your Files:</h2>';
+            fileListContainer.innerHTML = '<br><h2>Your Files:</h2>';
 
             res.items.forEach((item) => {
                 // Create a download link for each file
