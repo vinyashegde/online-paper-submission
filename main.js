@@ -1,3 +1,5 @@
+
+
 // Function to display the login section
 function showLoginSection() {
     document.getElementById("login-section").style.display = "block";
@@ -27,11 +29,11 @@ function uploadFile() {
     if (file) {
         // Check file size and type
         if (file.size > 2 * 1024 * 1024) {
-            alert("File size must be less than 2 MB.");
+            toastr.error("File size must be less than 2 MB.");
             return;
         }
         if (file.type !== "application/pdf") {
-            alert("Only PDF files are allowed.");
+            toastr.error("Only PDF files are allowed.");
             return;
         }
 
@@ -49,7 +51,10 @@ function uploadFile() {
 
             uploadTask.then(snapshot => {
                 // Upload completed successfully
-                alert("PDF file uploaded successfully.");
+                toastr.success("PDF file uploaded successfully.");
+
+                startCountdown(); // Start the countdown after a successful file upload
+
                 // Hide the loading icon
                 loadingIcon.style.display = "none";
 
@@ -135,7 +140,7 @@ function copyDownloadLink() {
     const downloadLink = document.getElementById("download-link");
     downloadLink.select();
     document.execCommand("copy");
-    alert("Download link copied to clipboard!");
+    toastr.success("Download link copied to clipboard!");
 }
 
 
@@ -148,7 +153,7 @@ function login() {
 
     firebase.auth().signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
-            alert("Login successful.");
+            toastr.success("Login sucess.");
             const user = userCredential.user;
 
             // Check the user's role and show the upload section for teachers
@@ -175,7 +180,7 @@ function login() {
 function signOut() {
     firebase.auth().signOut()
         .then(() => {
-            alert("Sign-out successful.");
+            toastr.error("Sign-out successful.");
             showLoginSection();
         })
         .catch((error) => {
@@ -278,7 +283,7 @@ function isUserSignedIn() {
 function signOut() {
     firebase.auth().signOut()
         .then(() => {
-            alert("Sign-out successful.");
+            toastr.error("Sign-out successful.");
             location.reload(); // Reload the page
         })
         .catch((error) => {
@@ -311,7 +316,7 @@ function registerUser() {
                 subject: subject,
                 role: role,
             });
-            alert("User registered successfully.");
+            toastr.success("User registered successfully.");
         })
         .catch((error) => {
             const errorMessage = error.message;
@@ -353,8 +358,7 @@ function openWin() {
 
 // Function to send email with the encrypted link
 function sendEmail() {
-
-    alert("clicked.");    
+ 
     const encryptedLink = document.getElementById("download-link").value;
 
     // Check if the encrypted link is available
@@ -369,8 +373,36 @@ function sendEmail() {
         window.location.href = mailtoURL;
 
         // Inform the user that the email has been sent
-        alert("Email opened successfully.");
+        toastr.success("Opening Email...");
     } else {
-        alert("Please generate the encrypted link first.");
+        toastr.error("Please generate the encrypted link first.");
     }
 }
+
+let countdown;
+// Function to start the countdown
+function startCountdown() {
+    countdown = 20; // Set the initial countdown value to 60 seconds
+
+    const countdownContainer = document.getElementById("countdown-container");
+    const countdownValueElement = document.getElementById("countdown-value");
+
+    countdownContainer.style.display = "block"; // Show the countdown container
+
+    const countdownInterval = setInterval(() => {
+        // Update the countdown value and display it
+        countdown--;
+        countdownValueElement.textContent = countdown;
+
+        if (countdown <= 0) {
+            clearInterval(countdownInterval); // Stop the countdown when it reaches zero
+            // Refresh the page
+            toastr.error("Time Expired. Refreshing the page.");
+            location.reload();
+        }
+    }, 1000); // Update the countdown every second
+}
+
+
+
+

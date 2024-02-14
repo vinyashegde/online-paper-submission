@@ -5,96 +5,111 @@
     <title>Role-Based File Upload</title>
     <!-- <link rel="stylesheet" type="text/css" href="styles.css" /> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-     /* Remove the outline and focus styles */
-.card {
-    box-shadow: none;
-    border: none;
-}
-.card:focus, .card:active {
-    box-shadow: none;
-    border: none;
-}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Add this script tag to include toastr library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
-  </style>
+
+    <style>
+        /* Remove the outline and focus styles */
+        .card {
+            box-shadow: none;
+            border: none;
+        }
+
+        .card:focus,
+        .card:active {
+            box-shadow: none;
+            border: none;
+        }
+    </style>
 </head>
 
 <body>
-  <div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <!-- First Section: Login Page -->
-            <div id="login-section" class="card">
-                <h1 class="card-title">Login</h1><br>
-                <input type="text" id="login-email" class="form-control" placeholder="Email" /><br>
-                <input type="password" id="login-password" class="form-control" placeholder="Password" /><br>
-                <button onclick="login()" class="btn btn-primary btn-block">Login</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-6 mx-auto">
-            <!-- Second Section: File Upload for Teachers Page -->
-            <div id="file-upload-section" style="display: none">
-                <div class="card">
-                    <h1 class="card-title">File Upload for Teachers</h1><br>
-                    <input type="file" id="file-input" class="form-control" /><br>
-                    <button onclick="uploadFile()" class="btn btn-primary btn-block">Upload File</button>
-                    <button onclick="viewOwnFiles()" class="btn btn-info btn-block">View Your Files</button><br>
-                    <div id="loading-icon" style="display: none">
-                        <p>Uploading...</p>
-                    </div>
-                    <div id="download-link-container" style="display: none">
-                        <p>File uploaded successfully. Download link:</p>
-                        <input type="text" id="download-link" class="form-control" readonly />
-                        <button onclick="sendEmail()" class="btn btn-success btn-block">Send Email</button><br>
-                    </div>
-                    <div id="file-listt"></div>
-                    <br><button onclick="signOut()" class="btn btn-danger btn-block">Sign Out</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6 mx-auto">
-            <!-- Third Section: Admin Page to Display Teacher Files -->
-            <div id="admin-section" style="display: none">
-              <h1>Admin Dashboard</h1>
-                <div class="card">
-                    <button onclick="openWin()" class="btn btn-info btn-block">Decryption Tool</button>
-                    <br><br><h3>Admin Page</h3>
-                    <button onclick="showRegistrationForm()" class="btn btn-primary btn-block">Add User/Admin</button><br><br>
-                    <div id="registration-form" style="display: none">
-                        <h2>Register a New User</h2>
-                        <form id="user-registration-form">
-                            <label for="name">Name:</label>
-                            <input type="text" id="name" class="form-control" required /><br /><br />
-                            <label for="email">Email:</label>
-                            <input type="email" id="email" class="form-control" required /><br /><br />
-                            <label for="subject">Subject:</label>
-                            <input type="text" id="subject" class="form-control" required /><br /><br />
-                            <label for="role">Role:</label>
-                            <select id="role" class="form-control" required>
-                                <option value="teacher">Teacher</option>
-                                <option value="admin">Admin</option>
-                            </select>
-                            <br /><br />
-                            <label for="password">Password:</label>
-                            <input type="password" id="password" class="form-control" required /><br /><br />
-                            <br><button type="button" onclick="registerUser()" class="btn btn-success btn-block">Register</button><br>
-                        </form>
-                    </div>
-                    <div id="file-list" style="display: none">
-                        <h1>asdasd</h1>
-                    </div>
-                    <br><button onclick="signOut()" class="btn btn-danger btn-block">Sign Out</button>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <!-- First Section: Login Page -->
+                <div id="login-section" class="card">
+                    <h1 class="card-title">Login</h1><br>
+                    <input type="text" id="login-email" class="form-control" placeholder="Email" /><br>
+                    <input type="password" id="login-password" class="form-control" placeholder="Password" /><br>
+                    <button onclick="login()" class="btn btn-primary btn-block">Login</button>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <!-- Second Section: File Upload for Teachers Page -->
+                <div id="file-upload-section" style="display: none">
+                    <div class="card">
+                        <h1 class="card-title">File Upload for Teachers</h1><br>
+                        <input type="file" id="file-input" class="form-control" /><br>
+                        <button onclick="uploadFile()" class="btn btn-primary btn-block">Upload File</button>
+                        <button onclick="viewOwnFiles()" class="btn btn-info btn-block">View Your Files</button><br>
+                        <div id="loading-icon" style="display: none">
+                            <p>Uploading...</p>
+                        </div>
+                        <div id="download-link-container" style="display: none">
+                            <p>File uploaded successfully. Download link:</p>
+                            <input type="text" id="download-link" class="form-control" readonly />
+                            <button onclick="sendEmail()" class="btn btn-success btn-block">Send Email</button><br>
+                            <!-- Add this div for the countdown -->
+                            <div id="countdown-container" style="display: none;">
+                                <p id="countdown-text">Expires in: <span id="countdown-value">60</span> seconds</p>
+                            </div>
+
+                        </div>
+                        <div id="file-listt"></div>
+                        <br><button onclick="signOut()" class="btn btn-danger btn-block">Sign Out</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mx-auto">
+                <!-- Third Section: Admin Page to Display Teacher Files -->
+                <div id="admin-section" style="display: none">
+                    <h1>Admin Dashboard</h1>
+                    <div class="card">
+                        <button onclick="openWin()" class="btn btn-info btn-block">Decryption Tool</button>
+                        <br><br>
+                        <h3>Admin Page</h3>
+                        <button onclick="showRegistrationForm()" class="btn btn-primary btn-block">Add
+                            User/Admin</button><br><br>
+                        <div id="registration-form" style="display: none">
+                            <h2>Register a New User</h2>
+                            <form id="user-registration-form">
+                                <label for="name">Name:</label>
+                                <input type="text" id="name" class="form-control" required /><br /><br />
+                                <label for="email">Email:</label>
+                                <input type="email" id="email" class="form-control" required /><br /><br />
+                                <label for="subject">Subject:</label>
+                                <input type="text" id="subject" class="form-control" required /><br /><br />
+                                <label for="role">Role:</label>
+                                <select id="role" class="form-control" required>
+                                    <option value="teacher">Teacher</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                                <br /><br />
+                                <label for="password">Password:</label>
+                                <input type="password" id="password" class="form-control" required /><br /><br />
+                                <br><button type="button" onclick="registerUser()"
+                                    class="btn btn-success btn-block">Register</button><br>
+                            </form>
+                        </div>
+                        <div id="file-list" style="display: none">
+                            <h1>All the Files Uploaded:</h1>
+                        </div>
+                        <br><button onclick="signOut()" class="btn btn-danger btn-block">Sign Out</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Include Firebase scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.3.0/crypto-js.js"></script>
@@ -105,24 +120,34 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
     <!-- Firebase configuration -->
     <script>
-      const firebaseConfig = {
-        apiKey: "AIzaSyBrYSQxr4BNgFuqEtAzSy7hH6fhfqNicZA",
-        authDomain: "paper2-d48b3.firebaseapp.com",
-        databaseURL: "https://paper2-d48b3-default-rtdb.firebaseio.com",
-        projectId: "paper2-d48b3",
-        storageBucket: "paper2-d48b3.appspot.com",
-        messagingSenderId: "687285383370",
-        appId: "1:687285383370:web:853c5ae705d4455363c433",
-        measurementId: "G-35C4139D7B",
-      };
+        const firebaseConfig = {
+            apiKey: "AIzaSyBrYSQxr4BNgFuqEtAzSy7hH6fhfqNicZA",
+            authDomain: "paper2-d48b3.firebaseapp.com",
+            databaseURL: "https://paper2-d48b3-default-rtdb.firebaseio.com",
+            projectId: "paper2-d48b3",
+            storageBucket: "paper2-d48b3.appspot.com",
+            messagingSenderId: "687285383370",
+            appId: "1:687285383370:web:853c5ae705d4455363c433",
+            measurementId: "G-35C4139D7B",
+        };
 
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+
+        /// Initialize toastr
+        toastr.options = {
+            positionClass: "toast-bottom-right",
+            closeButton: true,
+            progressBar: true,
+            timeOut: 5000, // 5 seconds
+        };
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
     <!-- JavaScript code from main.js -->
     <script src="main.js"></script>
-  </body>
+</body>
+
 </html>
