@@ -350,3 +350,27 @@ function viewOwnFiles() {
 function openWin() {
     window.open("encrypt.html");
 }
+
+// Function to send email with the encrypted link
+function sendEmail() {
+
+    alert("clicked.");    
+    const encryptedLink = document.getElementById("download-link").value;
+
+    // Check if the encrypted link is available
+    if (encryptedLink) {
+        const subject = "Encrypted Link Generated";
+        const emailBody = `Check out this encrypted link: ${encryptedLink}`;
+
+        // Create a mailto URL with the subject and body
+        const mailtoURL = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+
+        // Open the default email app with the mailto URL
+        window.location.href = mailtoURL;
+
+        // Inform the user that the email has been sent
+        alert("Email opened successfully.");
+    } else {
+        alert("Please generate the encrypted link first.");
+    }
+}
