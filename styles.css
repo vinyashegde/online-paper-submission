@@ -85,21 +85,22 @@ button {
     background-color: #007BFF;
     color: #fff;
     border: none;
-    padding: 10px 20px;
+    padding: 12px 24px;
     cursor: pointer;
     border-radius: 5px;
     font-size: 18px;
-    transition: background-color 0.3s ease;
-    /* Add transition for hover effect */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Add transform transition */
 }
 
+button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+    transform: scale(1.05); /* Add a slight scale effect on hover */
+}
 
 /* Sign Out button */
-
 button#sign-out-button {
     background-color: #DC3545;
 }
-
 
 /* File Upload form */
 
@@ -145,14 +146,40 @@ button#sign-out-button {
     /* Add transition for hover effect */
 }
 
+/* File list item hover effect */
+#file-list a:hover,
+#file-listt a:hover {
+    background-color: #f5f5f5; /* Lighter background on hover */
+}
 
-/* Responsive styles */
 
+
+/* Responsive styles for the button */
 @media screen and (max-width: 768px) {
-    .card {
-        max-width: 100%;
-    }
     button {
         width: 100%;
     }
 }
+
+/* Password visibility eye icon */
+.password-container {
+    position: relative;
+}
+
+.form-control {
+    padding-right: 36px; /* Adjust the padding to accommodate the eye icon */
+}
+
+.eye-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #ccc; /* Default color for the eye icon */
+}
+
+.eye-icon:hover {
+    color: #007BFF; /* Change color on hover */
+}
+

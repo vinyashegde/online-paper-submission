@@ -48,6 +48,7 @@ function uploadFile() {
             // Show the loading icon
             const loadingIcon = document.getElementById("loading-icon");
             loadingIcon.style.display = "block";
+            toastr.info("Uploading...");
 
             uploadTask.then(snapshot => {
                 // Upload completed successfully
@@ -171,7 +172,8 @@ function login() {
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            alert("Login failed: " + errorMessage);
+            // alert("Login failed: " + errorMessage);
+            toastr.error("Login Failed");
         });
 }
 
@@ -373,7 +375,7 @@ function sendEmail() {
         window.location.href = mailtoURL;
 
         // Inform the user that the email has been sent
-        toastr.success("Opening Email...");
+        toastr.info("Opening Email...");
     } else {
         toastr.error("Please generate the encrypted link first.");
     }
@@ -382,7 +384,7 @@ function sendEmail() {
 let countdown;
 // Function to start the countdown
 function startCountdown() {
-    countdown = 20; // Set the initial countdown value to 60 seconds
+    countdown = 30; // Set the initial countdown value to 60 seconds
 
     const countdownContainer = document.getElementById("countdown-container");
     const countdownValueElement = document.getElementById("countdown-value");
@@ -406,3 +408,18 @@ function startCountdown() {
 
 
 
+// Add this JavaScript function
+function togglePasswordVisibility() {
+    const passwordInput = document.getElementById("login-password");
+    const eyeIcon = document.getElementById("eye-icon");
+
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        eyeIcon.classList.remove("fa-eye");
+        eyeIcon.classList.add("fa-eye-slash");
+    } else {
+        passwordInput.type = "password";
+        eyeIcon.classList.remove("fa-eye-slash");
+        eyeIcon.classList.add("fa-eye");
+    }
+}

@@ -6,6 +6,9 @@
     <!-- <link rel="stylesheet" type="text/css" href="styles.css" /> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Add this link to include Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <!-- Add this script tag to include toastr library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -34,7 +37,16 @@
                 <div id="login-section" class="card">
                     <h1 class="card-title">Login</h1><br>
                     <input type="text" id="login-email" class="form-control" placeholder="Email" /><br>
-                    <input type="password" id="login-password" class="form-control" placeholder="Password" /><br>
+                    <!-- Add this HTML structure for the password input with the eye icon -->
+                    <!-- Add this HTML structure for the password input with the eye icon inside -->
+                    <div class="password-container">
+                        <input type="password" id="login-password" class="form-control" placeholder="Password" />
+                        <span class="eye-icon" onclick="togglePasswordVisibility()">
+                            <i class="fa fa-eye" id="eye-icon"></i>
+                        </span>
+                    </div>
+                    <br><br>
+
                     <button onclick="login()" class="btn btn-primary btn-block">Login</button>
                 </div>
             </div>
@@ -140,7 +152,7 @@
             positionClass: "toast-bottom-right",
             closeButton: true,
             progressBar: true,
-            timeOut: 5000, // 5 seconds
+            timeOut: 2000, // 5 seconds
         };
     </script>
 
