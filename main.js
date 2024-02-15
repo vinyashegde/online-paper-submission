@@ -2,7 +2,7 @@
 
 // Function to display the login section
 function showLoginSection() {
-    document.getElementById("login-section").style.display = "block";
+    document.getElementById("login-page").style.display = "block";
     document.getElementById("file-upload-section").style.display = "none";
     document.getElementById("admin-section").style.display = "none";
 }
@@ -178,17 +178,17 @@ function login() {
 }
 
 
-// Function to sign out the current user and reload the page
-function signOut() {
-    firebase.auth().signOut()
-        .then(() => {
-            toastr.error("Sign-out successful.");
-            showLoginSection();
-        })
-        .catch((error) => {
-            console.error("Sign-out failed: " + error);
-        });
-}
+// // Function to sign out the current user and reload the page
+// function signOut() {
+//     firebase.auth().signOut()
+//         .then(() => {
+//             showLoginSection();
+//             toastr.error("Sign-out successful.");
+//         })
+//         .catch((error) => {
+//             console.error("Sign-out failed: " + error);
+//         });
+// }
 
 // Function to display files uploaded by all teachers in the admin page
 function displayTeacherFiles() {
@@ -299,6 +299,12 @@ function showRegistrationForm() {
     registrationForm.style.display = "block";
 }
 
+// Function to show the registration form
+function hideRegistrationForm() {
+    const registrationForm = document.getElementById("registration-form");
+    registrationForm.style.display = "none";
+}
+
 // Function to register a new user
 function registerUser() {
     const name = document.getElementById("name").value;
@@ -319,10 +325,11 @@ function registerUser() {
                 role: role,
             });
             toastr.success("User registered successfully.");
+            hideRegistrationForm();
         })
         .catch((error) => {
             const errorMessage = error.message;
-            alert("User registration failed: " + errorMessage);
+            toastr.error("User registration failed: " + errorMessage);
         });
 }
 
