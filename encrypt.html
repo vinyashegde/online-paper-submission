@@ -4,17 +4,26 @@
 <head>
     <title>Link Encryption and Decryption</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Add this link to include Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Add this script tag to include toastr library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
     <style>
         /* Remove the outline and focus styles */
-.card {
-    box-shadow: none;
-    border: none;
-}
-.card:focus, .card:active {
-    box-shadow: none;
-    border: none;
-}
+        .card {
+            box-shadow: none;
+            border: none;
+        }
 
+        .card:focus,
+        .card:active {
+            box-shadow: none;
+            border: none;
+        }
     </style>
 </head>
 
@@ -25,7 +34,8 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <h2 class="mt-4">Decrypt Link</h2>
-                <input type="text" id="encryptedLinkToDecrypt" class="form-control" placeholder="Enter the encrypted link">
+                <input type="text" id="encryptedLinkToDecrypt" class="form-control"
+                    placeholder="Enter the encrypted link">
                 <button onclick="decryptLink()" class="btn btn-primary btn-block">Decrypt</button>
             </div>
         </div>
@@ -38,10 +48,41 @@
         </div>
     </div>
 
+    <!-- Add this div for the countdown -->
+    <div id="countdown-container" style="display: none;">
+        <p id="countdown-text">Expires in: <span id="countdown-value">60</span> seconds</p>
+    </div>
+
     <!-- Include Crypto-JS library (AES) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
 
     <script>
+
+
+        let countdown;
+        // Function to start the countdown
+        function startCountdown() {
+            countdown = 30; // Set the initial countdown value to 60 seconds
+
+            const countdownContainer = document.getElementById("countdown-container");
+            const countdownValueElement = document.getElementById("countdown-value");
+
+            countdownContainer.style.display = "block"; // Show the countdown container
+
+            const countdownInterval = setInterval(() => {
+                // Update the countdown value and display it
+                countdown--;
+                countdownValueElement.textContent = countdown;
+
+                if (countdown <= 0) {
+                    clearInterval(countdownInterval); // Stop the countdown when it reaches zero
+                    // Refresh the page
+                    toastr.error("Time Expired. Refreshing the page.");
+                    location.reload();
+                }
+            }, 1000); // Update the countdown every second
+        }
+
         // Encryption Key (must be kept secret)
         const encryptionKey = "YourSecretKey"; // Change this to your secret key
 
@@ -50,8 +91,10 @@
             try {
                 const decryptedLink = CryptoJS.AES.decrypt(encryptedLinkToDecrypt, encryptionKey).toString(CryptoJS.enc.Utf8);
                 document.getElementById("decryptedLink").value = decryptedLink;
+                toastr.success("Decrypted Successfully");
+                startCountdown();
             } catch (error) {
-                alert("Decryption failed. Make sure you entered the correct encrypted link and key.");
+                toastr.error("Decryption failed. Make sure you entered the correct encrypted link and key.");
             }
         }
     </script>
