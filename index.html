@@ -6,27 +6,12 @@
     <!-- <link rel="stylesheet" type="text/css" href="styles.css" /> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Add this link to include Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Use Font Awesome version 5 -->
 
     <!-- Add this script tag to include toastr library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <!-- 
-
-    <style>
-        /* Remove the outline and focus styles */
-        .card {
-            box-shadow: none;
-            border: none;
-        }
-
-        .card:focus,
-        .card:active {
-            box-shadow: none;
-            border: none;
-        }
-    </style> -->
+    
 </head>
 
 <body class="bg-gray-200 font-sans">
@@ -38,6 +23,13 @@
             <div class="absolute top-0 right-0 m-4">
                 <img src="pillai.png" alt="Logo" class="w-12 h-18">
             </div>
+
+            <!-- Dark Mode Toggle Button
+            <div class="absolute top-0 left-0 m-4">
+                <button id="darkModeToggle" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div> -->
 
             <!-- First Section: Login Page -->
             <div id="login-section" class="bg-white rounded-lg shadow-md p-8">
@@ -181,6 +173,15 @@
             progressBar: true,
             timeOut: 2500, // 2.5 seconds
         };
+
+        // // Dark Mode Toggle Script
+        // const darkModeToggle = document.getElementById('darkModeToggle');
+        // const body = document.body;
+
+        // darkModeToggle.addEventListener('click', () => {
+        //     body.classList.toggle('dark-mode');
+        // });
+
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
