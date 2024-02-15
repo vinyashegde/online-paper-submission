@@ -32,7 +32,13 @@
 <body class="bg-gray-200 font-sans">
 
     <div class="min-h-screen flex items-center justify-center">
-        <div class="w-full md:w-1/4">
+        <div class="w-full md:w-1/4 relative">
+
+            <!-- Logo at the top-right corner -->
+            <div class="absolute top-0 right-0 m-4">
+                <img src="pillai.png" alt="Logo" class="w-12 h-18">
+            </div>
+
             <!-- First Section: Login Page -->
             <div id="login-section" class="bg-white rounded-lg shadow-md p-8">
                 <h1 class="text-3xl mb-6 text-center font-semibold">Login</h1>
@@ -46,9 +52,9 @@
                             class="block text-gray-600 text-sm font-medium mb-2">Password:</label>
                         <input type="password" id="login-password" class="form-input w-full pr-10"
                             placeholder="Your password" />
-                        <span class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                        <!-- <span class="absolute inset-y-0 right-0 pr-3 flex items-center">
                             <i class="fa fa-eye cursor-pointer text-gray-500" id="eye-icon"></i>
-                        </span>
+                        </span> -->
                     </div>
                     <button type="button" onclick="login()"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md shadow-md">Login</button>
@@ -94,7 +100,7 @@
             </div>
 
             <!-- Third Section: Admin Page to Display Teacher Files -->
-            <div id="admin-section" class="bg-white rounded-lg shadow-md p-8 hidden"
+            <div id="admin-section" class="bg-white rounded-lg shadow-md p-8 hidden">
                 <h1 class="text-3xl mb-6 text-center font-semibold">Admin Dashboard</h1>
                 <div class="grid grid-cols-2 gap-4">
                     <button type="button" onclick="openWin()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md shadow-md">Decryption Tool</button>
