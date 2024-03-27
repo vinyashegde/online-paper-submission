@@ -169,6 +169,43 @@
         window.onload = checkIP;
     </script> -->
 
+<!-- //2nd script for ip starts
+    <script>
+        // Function to check if the user is connected to a specific network
+        async function checkNetwork() {
+            try {
+                const pc = new RTCPeerConnection();
+                const ipRegex = /\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/;
+
+                pc.createDataChannel('');
+                pc.createOffer(async offer => {
+                    const localDescription = offer.sdp;
+                    const match = localDescription.match(ipRegex);
+                    const userIP = match ? match[0] : null;
+                    
+                    // Replace '192.168.1' with the network's IP range you want to allow
+                    if (userIP && userIP.startsWith('192.168.1')) {
+                        // User is connected to the allowed network, continue accessing the website
+                        console.log('Allowed Network');
+                    } else {
+                        // User is not connected to the allowed network, redirect to 404.html page or display an error message
+                        window.location.href = '404.html';
+                    }
+
+                    // Close the connection after the check
+                    pc.close();
+                }, error => {
+                    console.error('Error creating offer:', error);
+                });
+            } catch (error) {
+                console.error('Error checking network:', error);
+            }
+        }
+
+        // Call the checkNetwork function when the page loads
+        window.onload = checkNetwork;
+    </script> -->
+
 
     <!-- Include Firebase scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.3.0/crypto-js.js"></script>
