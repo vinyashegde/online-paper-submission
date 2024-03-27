@@ -75,15 +75,15 @@ function uploadFile() {
                         const downloadLinkContainer = document.getElementById("download-link-container");
                         downloadLinkContainer.style.display = "block";
 
-                        // Automatically download the encrypted link to local storage as a text file
-                        const blob = new Blob([encryptedLink], { type: "text/plain" });
-                        const a = document.createElement("a");
-                        a.href = URL.createObjectURL(blob);
-                        a.download = "encrypted-link.txt";
-                        a.style.display = "none";
-                        document.body.appendChild(a);
-                        a.click();
-                        document.body.removeChild(a);
+                        // // Automatically download the encrypted link to local storage as a text file
+                        // const blob = new Blob([encryptedLink], { type: "text/plain" });
+                        // const a = document.createElement("a");
+                        // a.href = URL.createObjectURL(blob);
+                        // a.download = "encrypted-link.txt";
+                        // a.style.display = "none";
+                        // document.body.appendChild(a);
+                        // a.click();
+                        // document.body.removeChild(a);
                     })
                     .catch(error => {
                         console.error("Error generating download link: " + error);
