@@ -141,6 +141,34 @@
         </div>
     </div>
 
+    <!-- <script>
+        // Function to fetch user's IP address
+        async function getUserIP() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                return data.ip;
+            } catch (error) {
+                console.error('Error fetching IP:', error);
+                return null;
+            }
+        }
+
+        // Function to check if user's IP is allowed
+        async function checkIP() {
+            const userIP = await getUserIP();
+            const allowedIPs = ['111.125.221.192', '192.168.1.1']; // Replace with your allowed IP addresses
+
+            if (!allowedIPs.includes(userIP)) {
+                // User's IP is not allowed, redirect to 404.html page
+                window.location.href = '404.html';
+            }
+        }
+
+        // Call the checkIP function when the page loads
+        window.onload = checkIP;
+    </script> -->
+
 
     <!-- Include Firebase scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.3.0/crypto-js.js"></script>
