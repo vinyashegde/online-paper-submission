@@ -2,7 +2,7 @@
 
 // Function to display the login section
 function showLoginSection() {
-    document.getElementById("login-page").style.display = "block";
+    document.getElementById("login-section").style.display = "block";
     document.getElementById("file-upload-section").style.display = "none";
     document.getElementById("admin-section").style.display = "none";
 }
